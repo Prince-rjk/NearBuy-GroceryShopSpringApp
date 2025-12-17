@@ -1,7 +1,6 @@
 package GroceryShopSpringApp.NearBuy.dto;
 
-public class InviteAdminDto extends InviteUserDto {
-
+public class InviteCoOrdinatorDto extends InviteUserDto {
     private String name;
     private String email;
     private Long phoneNumber;
@@ -11,10 +10,10 @@ public class InviteAdminDto extends InviteUserDto {
     private String addressLine3;
     private String gender;
 
-    public InviteAdminDto() {
+    public InviteCoOrdinatorDto() {
     }
 
-    public InviteAdminDto(String name, String email, Long phoneNumber, int pincode, String addressLine1, String addressLine2, String addressLine3, String gender) {
+    public InviteCoOrdinatorDto(String name, String email, Long phoneNumber, int pincode, String addressLine1, String addressLine2, String addressLine3, String gender) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;

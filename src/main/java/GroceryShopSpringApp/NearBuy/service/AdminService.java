@@ -1,6 +1,8 @@
 package GroceryShopSpringApp.NearBuy.service;
 
 import GroceryShopSpringApp.NearBuy.dto.InviteAdminDto;
+import GroceryShopSpringApp.NearBuy.enums.UserState;
+import GroceryShopSpringApp.NearBuy.enums.UserType;
 import GroceryShopSpringApp.NearBuy.exceptions.NotAuthorizedException;
 import GroceryShopSpringApp.NearBuy.models.User;
 import GroceryShopSpringApp.NearBuy.utilities.MappingUtility;
@@ -41,8 +43,16 @@ public class AdminService {
         admin = userService.saveOrUpdateUser(admin);
         // After saving admin object in table we need to mail the admin regarding the invite -> That he want to join or or not
         mailService.sendInvitationEmailToAdmin(admin, maint);
+    }
 
+    public void acceptInvite(int userId) {
+        User admin = userService.getUserById(userId);
+        if(admin == null || !admin.getUserType().equals(UserType.ADMIN.toString()) || admin.getStatus().equals(UserState.ACTIVE.toString())) { //if the user is not already registered or the user is not a ADMIN or the user is status is already active
+            throw new NotAuthorizedException("User is not allowed to perform this operation"); //we throw the exception
+        }
 
-
+        //if the exception is not occured, we can change the user status
+        admin.setStatus(UserState.ACTIVE.toString()); //change the status
+        userService.saveOrUpdateUser(admin); //update it in the database
     }
 }
