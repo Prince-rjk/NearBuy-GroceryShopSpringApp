@@ -59,14 +59,13 @@ public class MailService {
         context.setVariable("acceptLink", "https://www.google.com/");
         context.setVariable("rejectLink", "https://www.google.com/");
 
-     //   TemplateEngine templateEngine = getTemplateEngine(); //get the object of TemplateEngine
+     //   TemplateEngine templateEngine = getTemplateEngine(); //we get the object of TemplateEngine by Autowired it in the top
         //in this html template -> "admin-invitation-template", populate all the  values which are in context object
         //Finally, we will get the htmltemplate in a string format
         String htmlTemplate = templateEngine.process("admin-invitation-template", context); //(nameOfThe HTMLTemplate, contextObjectWhichHasAllTheValuesOfVariable) //populating all the values
 
         mimeMessageHelper.setText(htmlTemplate, true); //setting email body or email message
         javaMailSender.send(mimeMessage); //this line will send the email
-
     }
 
     //To load the HTML email template in the java code by populating all the values
