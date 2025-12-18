@@ -1,11 +1,10 @@
 package GroceryShopSpringApp.NearBuy.utilities;
 
-import GroceryShopSpringApp.NearBuy.dto.InviteAdminDto;
-import GroceryShopSpringApp.NearBuy.dto.InviteUserDto;
-import GroceryShopSpringApp.NearBuy.dto.RegisterShopDto;
+import GroceryShopSpringApp.NearBuy.dto.*;
 import GroceryShopSpringApp.NearBuy.enums.ShopState;
 import GroceryShopSpringApp.NearBuy.enums.UserState;
 import GroceryShopSpringApp.NearBuy.enums.UserType;
+import GroceryShopSpringApp.NearBuy.models.Product;
 import GroceryShopSpringApp.NearBuy.models.Shop;
 import GroceryShopSpringApp.NearBuy.models.User;
 import org.springframework.stereotype.Service;
@@ -57,6 +56,34 @@ public class MappingUtility {
         shop.setAddressLine3(registerShopDto.getAddressLine3());
         shop.setShopKeeper(shopKeeper);
         return shop;
+    }
+
+    public Product mapAddProductDtoToProduct(AddProductDto addProductDto, Shop shop){
+        Product product = new Product();
+        product.setProductName(addProductDto.getProductName());
+        product.setProductSpecification(addProductDto.getProductSpecification());
+        product.setCategory(addProductDto.getCategory());
+        product.setPrice(addProductDto.getPrice());
+        product.setManufacturer(addProductDto.getManufacturer());
+        product.setDiscount(addProductDto.getDiscount());
+        product.setShop(shop);
+        return product;
+    }
+
+    public User mapCustomerDtoToUser(CustomerDto customerDto){
+        User user = new User();
+        user.setStatus(UserState.ACTIVE.toString());
+        user.setName(customerDto.getName());
+        user.setUserType(UserType.CUSTOMER.toString());
+        user.setEmail(customerDto.getEmail());
+        user.setGender(customerDto.getGender());
+        user.setPassword(customerDto.getPassword());
+        user.setAddressLine1(customerDto.getAddressLine1());
+        user.setAddressLine2(customerDto.getAddressLine2());
+        user.setAddressLine3(customerDto.getAddressLine3());
+        user.setPincode(customerDto.getPincode());
+        user.setPhoneNumber(customerDto.getPhoneNumber());
+        return user;
     }
 
 }

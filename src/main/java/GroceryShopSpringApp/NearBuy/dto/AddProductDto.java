@@ -1,48 +1,31 @@
-package GroceryShopSpringApp.NearBuy.models;
+package GroceryShopSpringApp.NearBuy.dto;
 
-import jakarta.persistence.*;
+import GroceryShopSpringApp.NearBuy.models.ProductImageLink;
 
 import java.util.List;
 
-@Entity
-@Table(name = "products")
+public class AddProductDto {
+    String productName;
+    String productSpecification;
+    String manufacturer;
+    String price;
+    double discount;
+    int shopId;
+    String category;
+    List<ProductImageLink> productImageLinks;
 
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id; //every product has a unique id
-    private String productName;
-    private String productSpecification;
-    private String manufacturer;
-    private String price;
-    private double discount;
-    @ManyToOne //many products will be added to one shop
-    private Shop shop;
-    private String category;
-    @OneToMany //one product will have many image links (many images for display purpose)
-    private List<ProductImageLink> productImageLinks;
-
-    public Product() {
+    public AddProductDto() {
     }
 
-    public Product(int id, String productName, String productSpecification, String manufacturer, String price, double discount, Shop shop, String category, List<ProductImageLink> productImageLinks) {
-        this.id = id;
+    public AddProductDto(String productName, String productSpecification, String manufacturer, String price, double discount, int shopId, String category, List<ProductImageLink> productImageLinks) {
         this.productName = productName;
         this.productSpecification = productSpecification;
         this.manufacturer = manufacturer;
         this.price = price;
         this.discount = discount;
-        this.shop = shop;
+        this.shopId = shopId;
         this.category = category;
         this.productImageLinks = productImageLinks;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getProductName() {
@@ -85,12 +68,12 @@ public class Product {
         this.discount = discount;
     }
 
-    public Shop getShop() {
-        return shop;
+    public int getShopId() {
+        return shopId;
     }
 
-    public void setShop(Shop shop) {
-        this.shop = shop;
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
     }
 
     public String getCategory() {
