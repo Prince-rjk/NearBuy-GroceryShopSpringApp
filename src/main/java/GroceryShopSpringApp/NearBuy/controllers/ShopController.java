@@ -23,6 +23,5 @@ public class ShopController {
     @PostMapping("/register")
     public void registerShop(@RequestBody RegisterShopDto registerShopDto) {
         shopService.registerShop(registerShopDto);
-
     }
 }
